@@ -1,0 +1,20 @@
+<h1>Lista de Cultivos</h1>
+<a href="{% url 'cultivos:crear' %}">Nuevo Cultivo</a>
+<table border="1" cellpadding="5">
+ <tr><th>Nombre</th><th>Fecha
+Siembra</th><th>Estado</th><th>Sector</th><th>Acciones</th></tr>
+ {% for c in cultivos %}
+ <tr>
+ <td>{{ c.nombre }}</td>
+ <td>{{ c.fecha_siembra }}</td>
+ <td>{{ c.get_estado_display }}</td>
+ <td>{{ c.sector.nombre }}</td>
+ <td>
+ <a href="{% url 'cultivos:editar' c.id %}">Editar</a> |
+ <a href="{% url 'cultivos:eliminar' c.id %}">Eliminar</a>
+ </td>
+ </tr>
+ {% empty %}
+ <tr><td colspan="5">No hay cultivos registrados</td></tr>
+ {% endfor %}
+</table>
